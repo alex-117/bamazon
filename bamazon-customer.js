@@ -18,8 +18,8 @@ connection.connect(function(err) {
  
   console.log('connected as id ' + connection.threadId); 
     selectAll();
-});
-
+});    
+    
 function selectAll() {
 	connection.query("SELECT * FROM products", function (err, res) {
 		if (err) throw err;
@@ -66,22 +66,55 @@ function selectProduct(res) {
     });
 };
 
-function selectQuanity(res) {
+function selectQuanity(res_db) {
 //    console.log("SQ FUNC: ", res);
-    var quantityMessage = "There are currently " + res.stock_quantity + " " + res.product_name + "(s) available. How many would you like?"
+    var quantityMessage = "There are currently " + res_db.stock_quantity + " " + res_db.product_name + "(s) available. How many would you like?"
     inquirer.prompt([
         {
             name: "quantity",
             message: quantityMessage   
         }   
     ]).then(function(answer) {
-        if(answer.quantity <= res.stock_quantity) {
-            console.log("there are enough of this product");
+        if(answer.quantity <= res_db.stock_quantity) {
+            
+            var updatedQuantity = res_db.stock_quantity - answer.quantity;
+            console.log("QUANTITY: ", updatedQuantity);
+            
+            var totalPrice = res_db.price * answer.quantity;
+            var query = connection.query(
+                "UPDATE products SET ? WHERE ?",
+                [
+                    {
+                        stock_quantity: updatedQuantity
+                    },
+                    {
+                        item_id: res_db.item_id
+                    }
+                ],
+                function (err, res) {
+                    if(err) {throw err};
+                    console.log("Updated sql r", res);
+                    console.log("Updated sql", res_db);
+                    console.log("PRICE: $", totalPrice);
+//                    updatedTable();
+                }
+            );
         } else {
             console.log("There are not enough in stock!");
-            selectQuanity(res);
+//            selectQuanity(res);
         }
     });
+};
+
+function updatedTable() {
+    connection.query("SELECT * FROM products", function (err, res) {
+		if (err) throw err;
+        
+        console.log("Items for sale:");
+        for(var i = 0; i < res.length; i++) {
+            console.log("ID: " + res[i].item_id + " | Product: " + res[i].product_name + " | Price: $" + res[i].price + " | " + res[i].stock_quantity);    
+        }
+    })
 };
 
 
