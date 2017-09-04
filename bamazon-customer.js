@@ -36,13 +36,10 @@ function selectAll() {
 function selectProduct(res) {
     var choiceArr = [];
     for(var i = 0; i < res.length; i++) {
-        choiceArr.push("" + res[i].item_id);
+        var choice = res[i].item_id - 1;
+        choiceArr.push("" + choice);
     }
-    
-//    console.log(choiceArr);
-    
-//    NOTE THE CHOICEARR DOESN'T INCLUDE INDEX 0
-    
+//    console.log("CHOICEARR: ", choiceArr);
     inquirer.prompt([
         {
             name: "ID",
@@ -51,23 +48,17 @@ function selectProduct(res) {
             choices: choiceArr
         }
     ]).then(function(answer) {
-//        console.log("ANSWER: ", answer);
-//        console.log("ANSWER ID: ", answer.ID[0]);
-//        console.log("LENGTH: ", answer.ID.length);
-//        console.log("RES ID: ", res[answer.ID]);
-//        console.log("RES: ", res)
         for(var i = 0; i < answer.ID.length; i++) {
 //            console.log(answer);
-            var customerChoice = res[answer.ID];
-            console.log(res[answer.ID]);    
+            var customerChoice = res[answer.ID[i]];
+            console.log(customerChoice);    
         }
         
-        selectQuanity(res[answer.ID]);
+        selectQuanity(customerChoice);
     });
 };
 
 function selectQuanity(res_db) {
-//    console.log("SQ FUNC: ", res);
     var quantityMessage = "There are currently " + res_db.stock_quantity + " " + res_db.product_name + "(s) available. How many would you like?"
     inquirer.prompt([
         {
@@ -94,14 +85,13 @@ function selectQuanity(res_db) {
                 function (err, res) {
                     if(err) {throw err};
                     console.log("Updated sql r", res);
-                    console.log("Updated sql", res_db);
-                    console.log("PRICE: $", totalPrice);
-//                    updatedTable();
+                    console.log("TOTAL PRICE: $", totalPrice);
+                    updatedTable();
                 }
             );
         } else {
-            console.log("There are not enough in stock!");
-//            selectQuanity(res);
+            console.log("Insufficient Quantity!");
+            selectQuanity(res_db);
         }
     });
 };
@@ -110,23 +100,11 @@ function updatedTable() {
     connection.query("SELECT * FROM products", function (err, res) {
 		if (err) throw err;
         
-        console.log("Items for sale:");
+        console.log("UPDATED TABLE \n" + "Items for sale:");
         for(var i = 0; i < res.length; i++) {
             console.log("ID: " + res[i].item_id + " | Product: " + res[i].product_name + " | Price: $" + res[i].price + " | " + res[i].stock_quantity);    
         }
+        
+        connection.end();
     })
 };
-
-
-
-
-
-//connection.end();
-
-
-
-
-
-
-
-
