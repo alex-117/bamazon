@@ -35,13 +35,13 @@ function menuOptions() {
         {
             name: "options",
             message: "What would you like to do?",
-            type: "checkbox",
+            type: "list",
             choices: menuOptions
         }
-    ]).then(function(answer) {
-        var answer = answer.options[0];
-        
+    ]).then(function(answer) { 
+        var answer = answer.options;
         if(answer === menuOptions[0]) {
+            console.log("TRUE");
            allInventory();
         } else if(answer === menuOptions[1]) {
             lowInventory();
@@ -109,20 +109,18 @@ function addToProduct() {
             {
                 name: "product",
                 message: "Select product to add stock to:",
-                type: "checkbox",
+                type: "list",
                 choices: choiceArr
             }
         ]).then(function(answer) {
             var addStock = [];
-            console.log("ANSWER: ", answer);
             
             res.filter(function(productData) {
-                console.log("PRODUCT DATA: ", productData);
-                if(productData.product_name === answer.product[0]) {
+                if(productData.product_name === answer.product) {
                     addStock.push(productData);
                 }   
             });
-            //res necessary?
+
             addProductStock(addStock);
         });
     });
@@ -130,9 +128,6 @@ function addToProduct() {
 
 
 function addProductStock(addStock) {
-    console.log("INSIDE ADDPRODUCTSTOCK FUNCTION");
-    console.log(addStock[0].stock_quantity);
-        
     inquirer.prompt([
         {
             name: "add_stock",
@@ -143,7 +138,6 @@ function addProductStock(addStock) {
         addStock[0].stock_quantity += parseInt(answer.add_stock);
         var newStock = addStock[0].stock_quantity;
         console.log(addStock);
-        
         var query = connection.query(
         "UPDATE products SET ? WHERE ?",
         [
@@ -156,7 +150,7 @@ function addProductStock(addStock) {
         ], function(err, res) {
             if(err) {throw err};
             console.log("UPDATED QUANTITY: ", newStock);
-            
+        
             console.log("Is there anything else you would like to do?");
             menuOptions();
         })
@@ -193,23 +187,15 @@ function addNewProduct() {
             type: "input"
         }
     ]).then(function(answer) {
-//        console.log(answer);
-//        allInventory();
         var test = answer.new_product_name;
 
         var query = connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('" + answer.new_product_name + "','" + answer.new_product_department + "','" + answer.new_product_price + "','" + answer.new_product_quantity +"')", function(err, res){ 
             if(err) {throw err};
 
-//            console.log(answer.new_product_name);
         });
         allInventory();
-        menuOptions();
     });
 }
-
-
-
-
 
 
 
