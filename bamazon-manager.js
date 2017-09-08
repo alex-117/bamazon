@@ -40,12 +40,15 @@ function menuOptions() {
         }
     ]).then(function(answer) {
         var answer = answer.options[0];
+        
         if(answer === menuOptions[0]) {
            allInventory();
         } else if(answer === menuOptions[1]) {
             lowInventory();
         } else if(answer === menuOptions[2]) {
-            addProduct();
+            addToProduct();
+        } else if(answer === menuOptions[3]) {
+            addNewProduct();
         } else if(answer === menuOptions[4]) {
             endTask();
         }
@@ -90,8 +93,8 @@ function lowInventory() {
 //PROBLEMS
 //========================================
 //========================================
-//========================================
-function addProduct() {
+
+function addToProduct() {
     connection.query("SELECT * FROM products", function(err, res){ 
         if(err) {throw err};
         
@@ -111,8 +114,10 @@ function addProduct() {
             }
         ]).then(function(answer) {
             var addStock = [];
+            console.log("ANSWER: ", answer);
             
             res.filter(function(productData) {
+                console.log("PRODUCT DATA: ", productData);
                 if(productData.product_name === answer.product[0]) {
                     addStock.push(productData);
                 }   
@@ -135,7 +140,7 @@ function addProductStock(addStock) {
             type: "input"
         }
     ]).then(function(answer) {
-        addStock[0].stock_quantity += parseInt(answer.add_stock[0]);
+        addStock[0].stock_quantity += parseInt(answer.add_stock);
         var newStock = addStock[0].stock_quantity;
         console.log(addStock);
         
@@ -163,6 +168,49 @@ function addProductStock(addStock) {
 //===================================
 //===================================
 //===================================
+
+function addNewProduct() {
+        
+    inquirer.prompt([
+        {
+            name: "new_product_name",
+            message: "What product would you like to add?",
+            type: "input"
+        }, 
+        {
+            name: "new_product_department",
+            message: "What department does this product belong to?",
+            type: "input"
+        },
+        {
+            name: "new_product_price",
+            message: "Enter price of product:",
+            type: "input"
+        },
+        {
+            name: "new_product_quantity",
+            message: "Enter quantity of product:",
+            type: "input"
+        }
+    ]).then(function(answer) {
+//        console.log(answer);
+//        allInventory();
+        var test = answer.new_product_name;
+
+        var query = connection.query("INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES ('" + answer.new_product_name + "','" + answer.new_product_department + "','" + answer.new_product_price + "','" + answer.new_product_quantity +"')", function(err, res){ 
+            if(err) {throw err};
+
+//            console.log(answer.new_product_name);
+        });
+        allInventory();
+        menuOptions();
+    });
+}
+
+
+
+
+
 
 
 // end user task
