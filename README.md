@@ -9,13 +9,16 @@ Bamazon-Customer:
 When ran, this bamazon-customer.js file will create circumstances where the user is treated as if they were a 'customer' looking to make a purchase.
 
 - Upon running, the user will have a table displayed to them that contains all of the information regarding the items that the 'store' contains.
-![image]
-(/images/customer-purchase.png?raw=true)
+![image](images/customer-purchase.png?raw=true)
 - The user is then allowed to select a single product (NOTE: this application will only allow for users to select one product at a time. It is not built for multi-item processing) from the table to begin the 'purchase'.
+![image](images/customer-purchase.png?raw=true)
 - After the user selects the product, they are prompted with a question that states how much of the product they have in stock and asks how many they would like to purchase.
+![image](images/customer-purchase-data.png?raw=true)
 - Once the user inputs a quantity, the program will check to see if they have enough of the product in stock to meet the customer demands (this handles errors if user accidentally enters a quantity too large.)
   - If the 'store' does have enough of the product, the program will total cost of the purchase, display it to the customer and then display an updated table of all the products, showing their new quantities. The program will then exit.
+  ![image](images/customer-purchase-update.png?raw=true)
   - If the 'store' does not have enouugh product, a message will appear saying "Insufficient Quantity" and will automatically exit the program.
+  ![image](images/customer-insufficient-quantity.png?raw=true)
 
 
 Bamazon-Manager:
@@ -23,15 +26,24 @@ Bamazon-Manager:
 The bamazon-manager.js file will treat the user as if they were a manager at the store, giving them extra options and the ability to manipulate some items (data) in the database. 
 
 - Upon running, the user will be prompted with a question and a list of options to choose from. These options consist of viewing the entire inventory, viewing only low inventory, adding stock to a current product or even adding an entirely new product. Also, the user has the abliity to exit the program if they didn't mean to access it.
+![image](images/manager-tasks.png?raw=true)
   - If "View Products For Sale" is ran, the program will display all of the inventory in the store. This is similar to the bamazon-customer functionality, however now the program will repeat the initial prompt asking the user if they would like to do perform another task.
+  ![image](images/manager-product-table.png?raw=true)
   - If "View Low Inventory" is selected, the program will return to the user any of the items that have an inventory stock of less than 5. The user will then be prompted for additional tasks.
+  ![image](images/manager-low-inventory.png?raw=true)
   - If "Add to Inventory" is selected, the user will be given a list of current items in the store. They will be allowed to choose a single item (NOTE: Again this isn't built to handle more than 1 item at a time) of which they would like to add stock to.
+  ![image](images/manager-add-to-item.png?raw=true)
     - Once an item is selected, the program will inform the user of how many items are in stock for that product and ask how much stock they would like to add.
+    ![image](images/manager-add-to-item-quantity.png?raw=true)
     - After a quantity is passed into the program, the application will return raw data of the product which will show updated information for it.
+    ![image](images/manager-add-to-item-data.png?raw=true)
     - The user can then select to perform another task within the program.
 - If "Add New Product" is selected, the user will be prompted with a series of questions that the program will use to generate information about a new product.
+![image](images/manager-add-new-product.png?raw=true)
     - Afterwards the program will display a table consisting of all the inventory in the store (including the newly added product). The user will then be asked to perform anymore tasks.
+    ![image](images/manager-add-new-product-update.png?raw=true)
 - If "End Task" is selected, the program will display a message saying "Goodbye" and will end the program.
+![image](images/manager-end-task.png?raw=true)
 
 
 
