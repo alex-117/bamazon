@@ -10,7 +10,7 @@ When ran, this bamazon-customer.js file will create circumstances where the user
 
 - Upon running, the user will have a table displayed to them that contains all of the information regarding the items that the 'store' contains.
 ![image]
-(/images/customer-purchase.png)
+(/images/customer-purchase.png?raw=true)
 - The user is then allowed to select a single product (NOTE: this application will only allow for users to select one product at a time. It is not built for multi-item processing) from the table to begin the 'purchase'.
 - After the user selects the product, they are prompted with a question that states how much of the product they have in stock and asks how many they would like to purchase.
 - Once the user inputs a quantity, the program will check to see if they have enough of the product in stock to meet the customer demands (this handles errors if user accidentally enters a quantity too large.)
