@@ -2,11 +2,15 @@
 
 Bamazon is a small, simple 'shopping cart' type application (think Amazon or Ebay) where you can retrieve and add data (such as store items) to a database. It is a node.js application that uses the 'mysql' and 'inquirer' npm packages to give it the functionality that it has (i.e. accessing the database information or prompting the user with questions.)
 
+
+
 Bamazon-Customer:
 
 When ran, this bamazon-customer.js file will create circumstances where the user is treated as if they were a 'customer' looking to make a purchase.
 
-- Upon running, the user will have a table displayed to them that contains all of the information regarding the items that the 'store' contains. 
+- Upon running, the user will have a table displayed to them that contains all of the information regarding the items that the 'store' contains.
+![image]
+(/images/customer-purchase.png)
 - The user is then allowed to select a single product (NOTE: this application will only allow for users to select one product at a time. It is not built for multi-item processing) from the table to begin the 'purchase'.
 - After the user selects the product, they are prompted with a question that states how much of the product they have in stock and asks how many they would like to purchase.
 - Once the user inputs a quantity, the program will check to see if they have enough of the product in stock to meet the customer demands (this handles errors if user accidentally enters a quantity too large.)
