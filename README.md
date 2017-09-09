@@ -50,23 +50,23 @@ The bamazon-manager.js file will treat the user as if they were a manager at the
   
   ![image](images/manager-add-to-item.png?raw=true)
   
-    -- Once an item is selected, the program will inform the user of how many items are in stock for that product and ask how much stock they would like to add.
+  - Once an item is selected, the program will inform the user of how many items are in stock for that product and ask how much stock they would like to add.
     
-    ![image](images/manager-add-to-item-quantity.png?raw=true)
+  ![image](images/manager-add-to-item-quantity.png?raw=true)
     
-    -- After a quantity is passed into the program, the application will return raw data of the product which will show updated information for it.
+  - After a quantity is passed into the program, the application will return raw data of the product which will show updated information for it.
     
-    ![image](images/manager-add-to-item-data.png?raw=true)
+  ![image](images/manager-add-to-item-data.png?raw=true)
     
-    -- The user can then select to perform another task within the program.
+  - The user can then select to perform another task within the program.
     
 - If "Add New Product" is selected, the user will be prompted with a series of questions that the program will use to generate information about a new product.
 
 ![image](images/manager-add-new-product.png?raw=true)
 
-    - Afterwards the program will display a table consisting of all the inventory in the store (including the newly added product). The user will then be asked to perform anymore tasks.
+  - Afterwards the program will display a table consisting of all the inventory in the store (including the newly added product). The user will then be asked to perform anymore tasks.
     
-    ![image](images/manager-add-new-product-update.png?raw=true)
+  ![image](images/manager-add-new-product-update.png?raw=true)
     
 - If "End Task" is selected, the program will display a message saying "Goodbye" and will end the program.
 
